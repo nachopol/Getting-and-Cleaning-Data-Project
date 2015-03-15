@@ -12,11 +12,15 @@ setwd("/Ignacio/Curso Getting and Cleaning Data/Project/UCI HAR Dataset")
 
 ### LOADING METADATA
   #features <- fread("features.txt",sep = "\n") # this one fails because no \n in last line
-  feature.labels <- read.table(file = "features.txt",sep = " ")
-  activity.labels <- fread("activity_labels.txt",sep = " ",header=F)
+  feature.labels <- read.table("features.txt",sep = " ",header=F,
+                               col.names = c("index","feature"))
+  activity.labels <- read.table("activity_labels.txt",sep = " ",header=F,
+                                col.names = c("index","activity"))
 
-  subject.test <- fread("test/subject_test.txt",sep = "\n")
-  subject.train <- fread("train/subject_train.txt",sep = "\n")
+  subject.test <- read.table("test/subject_test.txt",sep = "",header=F,
+                             col.names = "subject")
+  subject.train <- read.table("train/subject_train.txt",sep = "",header=F,
+                              col.names = "subject")
   subject <- rbind(subject.test, subject.train)
   rm("subject.test","subject.train")
 
@@ -29,13 +33,13 @@ setwd("/Ignacio/Curso Getting and Cleaning Data/Project/UCI HAR Dataset")
   ### DATA (X)
     x.widths <- rep(16,561)
     my.data.laf <- laf_open_fwf("test/X_test.txt", 
-                                column_names = as.character(feature.labels$V2),
+                                column_names = as.character(feature.labels$feature),
                                 column_widths=x.widths,column_types=rep('double',561))
     X.test <- laf_to_ffdf(my.data.laf)
     X.test <- as.data.frame(X.test)
     
     my.data.laf <- laf_open_fwf("train/X_train.txt", 
-                                column_names = as.character(feature.labels$V2),
+                                column_names = as.character(feature.labels$feature),
                                 column_widths=x.widths,column_types=rep('double',561))
     X.train <- laf_to_ffdf(my.data.laf)
     X.train <- as.data.frame(X.train)
@@ -44,8 +48,8 @@ setwd("/Ignacio/Curso Getting and Cleaning Data/Project/UCI HAR Dataset")
     rm("X.test","X.train")
 
   ### ACTIVITY LABELS (y)
-    y.test <- fread("test/y_test.txt",sep = "\n")
-    y.train <- fread("train/y_train.txt",sep = "\n")
+    y.test <- read.table("test/y_test.txt",sep = "",header=F,col.names = "activity")
+    y.train <- read.table("train/y_train.txt",sep = "",header=F,col.names = "activity")
     y <- rbind(y.test, y.train)
     rm("y.test","y.train")
 
@@ -54,11 +58,17 @@ setwd("/Ignacio/Curso Getting and Cleaning Data/Project/UCI HAR Dataset")
     #X$Subject <- list(subject$V1)
     #X$activity <- y
     #typeof(y$V1)
+    #rm(mean_std)
+  # Extract all mean and standar deviation variables by name and 
+  # add Subjects and Activities columns related to each row
     mean_std <- X[,grep("(mean|Mean|.std)",names(X))]
-    mean_std$Subject <- factor(subject$V1)
-    mean_std$Activity <- factor(y$V1)
+    mean_std$Subject <- factor(subject$subject)
+    mean_std$Activity <- factor(y$activity)
+  # Calculate means by Subject and Activity
     out <- aggregate(. ~ Subject + Activity, mean_std,mean)
-    out$Activity <- merge(out,activity.labels,by.x="Activity",by.y="V1")$V2
+  # Assign descriptive labels to each activity from activity.label metadata
+    out$Activity <- merge(out,activity.labels,by.x="Activity",by.y="index")$activity
+  # Copy the result to the file 'tidy.txt'
     write.table(out,"tidy.txt",row.name=FALSE)
 #     out <- aggregate(mean_std,subject,mean)
 #     mean_std <- data.table(mean_std)
