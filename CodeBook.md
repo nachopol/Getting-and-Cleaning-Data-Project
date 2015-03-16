@@ -1,17 +1,26 @@
-===============================================================
-					DATA DICTIONARY
-===============================================================
+================================================
+#Getting and Cleaning Data R Project
+================================================
+####**Version 1.0**
+_Ignacio Herreros Hódar_
+_nachopol@gmail.com_
+================================================
+		DATA DICTIONARY
+================================================
 
-activity.labels
-		DATA FRAME
-						Information in activity_labels.txt. It contains the index and label of each activities.
-						index	activity
-						1		WALKING
-						2		WALKING_UPSTAIRS
-						3		WALKING_DOWNSTAIRS
-						4		SITTING
-						5		STANDING
-						6		LAYING
+Data Name : activity.labels  
+Data Type : DATA FRAME  
+Summary   : Information in activity_labels.txt. It contains the index and label of each activities.  
+Contents  :  
+index	activity  
+1	WALKING  
+2	WALKING_UPSTAIRS  
+3	WALKING_DOWNSTAIRS  
+4	SITTING  
+5	STANDING  
+6	LAYING  
+
+================================================
 
 feature.labels
 		DATA FRAME
