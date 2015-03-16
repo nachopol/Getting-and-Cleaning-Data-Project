@@ -605,7 +605,7 @@ _nachopol@gmail.com_
  Include the indexes of the activities performed in each of the rows of the X data. Indexes vary from 1 to 6.
 						
 ### mean.std _(DATA FRAME)_
-* __Summary__ : Tidy dataset with the average of each mean and standard deviation measurement.
+* __Summary__ : Subset of X dataset with just the mean and standard deviation measurements.
 * __Content__ : Contains a subset of the X data frame with 10299 rows and 88 columns including the Subject indexes, Activity labels and the 86 measurements which contain the texts 'mean', 'Mean' or 'std'.
 
 <table>
@@ -655,3 +655,8 @@ _nachopol@gmail.com_
 <tr><td>angle.Y.gravityMean.</td></tr><tr><td>angle.Z.gravityMean.</td></tr>
 <tr><td>Subject</td></tr><tr><td>Activity</td></tr>
 </table>
+
+### tidy _(DATA FRAME)_
+* __Summary__ : Average values of the measurements in mean_std dataset grouped by Subject and Activity. 
+ This dataset is finally writen to a file 'tidy.txt' which is the outcome required for the project.
+* __Content__ : 180 rows and 88 rows corresponding with Subject, Activity and the 86 mean and standard deviation measurements.
