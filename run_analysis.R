@@ -3,15 +3,13 @@
   library("ffbase")
   library("data.table")
 
-setwd("Curso Getting and Cleaning Data/Project/UCI HAR Dataset")
+#setwd("Curso Getting and Cleaning Data/Project/UCI HAR Dataset")
 
 ### LOAD METADATA (feature and activity labels)
   feature.labels <- read.table("features.txt",sep = " ",header=F,
                                col.names = c("index","feature"))
   activity.labels <- read.table("activity_labels.txt",sep = " ",header=F,
                                 col.names = c("index","activity"))
-
-#typeof (X.train[[1]])
 
 ### LOAD DATA FILES - The X file column names are taken from "features" metadata. 
 ###                   Column widths in X files are set to 16
