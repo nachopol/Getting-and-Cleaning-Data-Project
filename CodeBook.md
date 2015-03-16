@@ -12,13 +12,15 @@ Data Name : activity.labels
 Data Type : DATA FRAME  
 Summary   : Information in activity_labels.txt. It contains the index and label of each activities.  
 Contents  :  
-index	activity  
-1	WALKING  
-2	WALKING_UPSTAIRS  
-3	WALKING_DOWNSTAIRS  
-4	SITTING  
-5	STANDING  
-6	LAYING  
+<table>
+<tr><th>index</th><th>activity</th></tr>
+<tr><td>1</td><td>WALKING</td></tr>
+<tr><td>2</td><td>WALKING_UPSTAIRS</td></tr>
+<tr><td>3</td><td>WALKING_DOWNSTAIRS</td></tr> 
+<tr><td>4</td><td>SITTING</td></tr>
+<tr><td>5</td><td>STANDING</td></tr>
+<tr><td>6</td><td>LAYING</td></tr>
+</table>
 
 ================================================
 
